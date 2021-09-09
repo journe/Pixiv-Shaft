@@ -79,11 +79,12 @@ public class IllustDownload {
         });
     }
 
-    public static void downloadIllustFirstPage(IllustsBean illust) {
+    private static void downloadIllustFirstPage(IllustsBean illust) {
         downloadIllustFirstPageWithResolution(illust, Params.IMAGE_RESOLUTION_ORIGINAL);
     }
 
-    public static void downloadIllustFirstPageWithResolution(IllustsBean illust, String imageResolution) {
+    private static void downloadIllustFirstPageWithResolution(IllustsBean illust,
+        String imageResolution) {
         if (illust.getPage_count() == 1) {
             DownloadItem item = buildDownloadItem(illust, 0, imageResolution);
             Common.showToast(1 + "个任务已经加入下载队列");

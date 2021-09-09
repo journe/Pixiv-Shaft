@@ -350,6 +350,7 @@ public class FragmentIllust extends SwipeFragment<FragmentIllustBinding> {
         baseBind.related.setChangeAlphaWhenPress(true);
         baseBind.comment.setChangeAlphaWhenPress(true);
         baseBind.download.setOnClickListener(v -> {
+
             if (illust.getPage_count() == 1) {
                 IllustDownload.downloadIllustFirstPage(illust, (BaseActivity<?>) mContext);
             } else {

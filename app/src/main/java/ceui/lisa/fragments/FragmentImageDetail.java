@@ -1,5 +1,6 @@
 package ceui.lisa.fragments;
 
+import android.content.DialogInterface;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
@@ -15,10 +16,13 @@ import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.CustomViewTarget;
 import com.bumptech.glide.request.target.Target;
 import com.bumptech.glide.request.transition.Transition;
+import com.qmuiteam.qmui.skin.QMUISkinManager;
+import com.qmuiteam.qmui.widget.dialog.QMUIDialog;
 
 import java.io.File;
 
 import ceui.lisa.R;
+import ceui.lisa.activities.BaseActivity;
 import ceui.lisa.activities.Shaft;
 import ceui.lisa.core.GlideApp;
 import ceui.lisa.databinding.FragmentImageDetailBinding;
@@ -96,6 +100,26 @@ public class FragmentImageDetail extends BaseFragment<FragmentImageDetailBinding
                 adjustAutoScale();
             }
         });
+
+        baseBind.realIllustImage.setOnLongClickListener(v -> {
+          String[] IMG_RESOLUTION_TITLE = new String[] {
+              "下载",
+              "取消"
+          };
+          new QMUIDialog.CheckableDialogBuilder(mContext)
+              .setSkinManager(QMUISkinManager.defaultInstance(mContext))
+              .addItems(IMG_RESOLUTION_TITLE, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                  IllustDownload.downloadIllustCertainPage(mIllustsBean, index, (BaseActivity<?>) mContext);
+                  dialog.dismiss();
+                }
+              })
+              .create()
+              .show();
+          return true;
+        });
+        
     }
 
     @Override
